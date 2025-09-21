@@ -33,32 +33,6 @@ const Contact = () => {
     });
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Project Email",
-      value: "bitvengers.sih2025@gmail.com",
-      link: "mailto:bitvengers.sih2025@gmail.com"
-    },
-    {
-      icon: Github,
-      title: "GitHub Repository",
-      value: "github.com/bitvengers/onehealth-trace",
-      link: "https://github.com/bitvengers/onehealth-trace"
-    },
-    {
-      icon: MapPin,
-      title: "Team Location",
-      value: "Mumbai, Maharashtra, India",
-      link: null
-    },
-    {
-      icon: Phone,
-      title: "Project Lead",
-      value: "+91 98765 43210",
-      link: "tel:+919876543210"
-    }
-  ];
 
   const socialLinks = [
     {
@@ -108,154 +82,24 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
-          {/* Contact Form */}
-          <Card className="shadow-soft">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Send className="w-5 h-5" />
-                Send us a Message
-              </CardTitle>
-              <CardDescription>
-                Fill out the form below and we'll get back to you as soon as possible
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Enter your full name"
-                    required
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your email address"
-                    required
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    placeholder="What's this about?"
-                    required
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    placeholder="Tell us more about your inquiry..."
-                    rows={5}
-                    required
-                  />
-                </div>
-                
-                <Button type="submit" className="w-full" size="lg">
-                  <Send className="w-4 h-4 mr-2" />
-                  Send Message
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-
-          {/* Contact Information */}
-          <div className="space-y-6">
-            <Card className="shadow-soft">
-              <CardHeader>
-                <CardTitle>Contact Information</CardTitle>
-                <CardDescription>Reach out to us through any of these channels</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {contactInfo.map((contact, index) => (
-                  <div key={index} className="flex items-center gap-4 p-3 rounded-lg hover:bg-accent/50 transition-smooth">
-                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <contact.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium">{contact.title}</p>
-                      {contact.link ? (
-                        <a 
-                          href={contact.link}
-                          className="text-muted-foreground hover:text-primary transition-smooth text-sm"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {contact.value}
-                        </a>
-                      ) : (
-                        <p className="text-muted-foreground text-sm">{contact.value}</p>
-                      )}
-                    </div>
-                    {contact.link && (
-                      <ExternalLink className="w-4 h-4 text-muted-foreground" />
-                    )}
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Social Links */}
-            <Card className="shadow-soft">
-              <CardHeader>
-                <CardTitle>Follow Our Journey</CardTitle>
-                <CardDescription>Stay updated with our latest developments</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex gap-4">
-                  {socialLinks.map((social, index) => (
-                    <Button key={index} variant="outline" size="lg" asChild>
-                      <a href={social.url} target="_blank" rel="noopener noreferrer">
-                        <span className="mr-2">{social.icon}</span>
-                        {social.platform}
-                      </a>
-                    </Button>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* GitHub Repository Highlight */}
-            <Card className="shadow-soft border-primary/20">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <Github className="w-8 h-8 text-primary" />
-                  <div>
-                    <h3 className="font-bold">Open Source Project</h3>
-                    <p className="text-sm text-muted-foreground">Check out our code on GitHub</p>
-                  </div>
-                </div>
-                <Button className="w-full" asChild>
-                  <a href="https://github.com/bitvengers/onehealth-trace" target="_blank" rel="noopener noreferrer">
-                    <Github className="w-4 h-4 mr-2" />
-                    View Repository
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+        {/* Information Note */}
+        <Card className="shadow-soft mb-12">
+          <CardContent className="p-8 text-center">
+            <h2 className="text-2xl font-bold mb-4">Project Information</h2>
+            <p className="text-lg text-muted-foreground mb-6">
+              For detailed project information, system architecture, technical approach, and comprehensive data visualizations, 
+              please refer to our project presentation and data analysis files.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="flex items-center gap-2">
+                📊 View Data Visualizations
+              </Button>
+              <Button size="lg" variant="outline" className="flex items-center gap-2">
+                📋 Project Documentation
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* FAQ Section */}
         <Card className="shadow-soft">

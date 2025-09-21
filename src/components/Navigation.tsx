@@ -12,9 +12,6 @@ const Navigation = () => {
     { name: "Farmer Portal", href: "/farmer" },
     { name: "Consumer Portal", href: "/consumer" },
     { name: "Admin Dashboard", href: "/admin" },
-    { name: "AI Insights", href: "/ai-insights" },
-    { name: "Research", href: "/research" },
-    { name: "About Us", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
 

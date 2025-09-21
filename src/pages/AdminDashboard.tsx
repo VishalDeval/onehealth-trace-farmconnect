@@ -56,11 +56,40 @@ const AdminDashboard = () => {
     { farm: "Organic Farm D", issue: "QR code generation failed", severity: "low", time: "2 days ago" },
   ];
 
-  const diseaseData = [
-    { disease: "Mastitis", cases: 45, area: "Mumbai Region", trend: "stable" },
-    { disease: "Foot & Mouth", cases: 23, area: "Punjab Region", trend: "decreasing" },
-    { disease: "Avian Flu", cases: 12, area: "Karnataka Region", trend: "increasing" },
-    { disease: "Brucellosis", cases: 8, area: "Rajasthan Region", trend: "stable" },
+  // Real data based on antibiotic usage analysis
+  const antibioticClassData = [
+    { name: "Penicillins", count: 32, percentage: 32.3, color: "hsl(var(--primary))" },
+    { name: "Sulfonamides", count: 28, percentage: 28.3, color: "hsl(var(--secondary))" },
+    { name: "Quinolones", count: 15, percentage: 15.2, color: "hsl(var(--accent))" },
+    { name: "Fluoroquinolones", count: 12, percentage: 12.1, color: "hsl(var(--success))" },
+    { name: "Aminoglycosides", count: 8, percentage: 8.1, color: "hsl(var(--warning))" },
+    { name: "Others", count: 4, percentage: 4.0, color: "hsl(var(--muted))" },
+  ];
+
+  const animalDistribution = [
+    { animal: "Dairy Cattle/Buffaloes", count: 42, breeds: ["Sahiwal", "Gir", "Jersey", "Holstein"] },
+    { animal: "Sheep and Goats", count: 35, breeds: ["Marwari", "Jamunapari", "Sirohi", "Boer"] },
+    { animal: "Poultry", count: 22, breeds: ["Dindigul", "Aseel", "Leghorn", "Broiler"] },
+  ];
+
+  const breedData = [
+    { breed: "Sahiwal", percentage: 18.5 },
+    { breed: "Marwari", percentage: 16.2 },
+    { breed: "Dindigul", percentage: 14.8 },
+    { breed: "Gir", percentage: 12.3 },
+    { breed: "Jamunapari", percentage: 11.1 },
+    { breed: "Aseel", percentage: 9.8 },
+    { breed: "Sirohi", percentage: 8.7 },
+    { breed: "Others", percentage: 8.6 },
+  ];
+
+  const amuTrendData = [
+    { month: "Jan", responsible: 78, misuse: 22 },
+    { month: "Feb", responsible: 82, misuse: 18 },
+    { month: "Mar", responsible: 85, misuse: 15 },
+    { month: "Apr", responsible: 88, misuse: 12 },
+    { month: "May", responsible: 91, misuse: 9 },
+    { month: "Jun", responsible: 94, misuse: 6 },
   ];
 
   const getSeverityColor = (severity: string) => {
@@ -131,29 +160,23 @@ const AdminDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Antibiotics</span>
-                  <span className="text-sm font-medium">45%</span>
+                {antibioticClassData.map((antibiotic, index) => (
+                  <div key={index} className="flex justify-between items-center">
+                    <span className="text-sm">{antibiotic.name}</span>
+                    <span className="text-sm font-medium">{antibiotic.percentage}%</span>
+                  </div>
+                ))}
+                <div className="mt-4 space-y-2">
+                  {antibioticClassData.slice(0, 4).map((antibiotic, index) => (
+                    <div key={index}>
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs">{antibiotic.name}</span>
+                        <span className="text-xs">{antibiotic.count} cases</span>
+                      </div>
+                      <Progress value={antibiotic.percentage} className="h-2" />
+                    </div>
+                  ))}
                 </div>
-                <Progress value={45} className="h-2" />
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Anti-inflammatories</span>
-                  <span className="text-sm font-medium">28%</span>
-                </div>
-                <Progress value={28} className="h-2" />
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Vaccines</span>
-                  <span className="text-sm font-medium">18%</span>
-                </div>
-                <Progress value={18} className="h-2" />
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Others</span>
-                  <span className="text-sm font-medium">9%</span>
-                </div>
-                <Progress value={9} className="h-2" />
               </div>
             </CardContent>
           </Card>
@@ -190,23 +213,25 @@ const AdminDashboard = () => {
           {/* Disease Occurrence */}
           <Card className="shadow-soft">
             <CardHeader>
-              <CardTitle>Disease Occurrence</CardTitle>
-              <CardDescription>Regional disease monitoring</CardDescription>
+              <CardTitle>Animal & Breed Distribution</CardTitle>
+              <CardDescription>Livestock distribution based on real data analysis</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {diseaseData.map((disease, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 rounded-lg hover:bg-accent/50 transition-smooth">
-                    <div>
-                      <p className="font-medium">{disease.disease}</p>
-                      <p className="text-sm text-muted-foreground">{disease.area}</p>
+              <div className="space-y-6">
+                {animalDistribution.map((animal, index) => (
+                  <div key={index} className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-medium">{animal.animal}</h4>
+                      <Badge variant="outline">{animal.count} farms</Badge>
                     </div>
-                    <div className="text-right">
-                      <p className="text-lg font-bold">{disease.cases}</p>
-                      <Badge variant={disease.trend === "increasing" ? "destructive" : disease.trend === "decreasing" ? "default" : "secondary"}>
-                        {disease.trend}
-                      </Badge>
+                    <div className="grid grid-cols-2 gap-2">
+                      {animal.breeds.map((breed, breedIndex) => (
+                        <div key={breedIndex} className="text-sm text-muted-foreground bg-accent/20 px-2 py-1 rounded">
+                          {breed}
+                        </div>
+                      ))}
                     </div>
+                    <Progress value={(animal.count / 99) * 100} className="h-2" />
                   </div>
                 ))}
               </div>

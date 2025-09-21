@@ -55,11 +55,6 @@ const HeroSection = () => {
         </div>
         
         <div className="relative container mx-auto px-4 py-20 text-center text-white">
-          {/* SIH 2025 Banner */}
-          <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-6 py-2 mb-8 backdrop-blur-sm border border-white/20 animate-fade-in">
-            <Award className="w-5 h-5" />
-            <span className="font-semibold">SIH 2025 Project</span>
-          </div>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-slide-up">
             OneHealth Trace
@@ -86,11 +81,11 @@ const HeroSection = () => {
             <Link to="/consumer">
               <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 shadow-large hover-lift">
                 <QrCode className="w-5 h-5 mr-2" />
-                Login as Consumer
+                Scan QR
               </Button>
             </Link>
             <Link to="/admin">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 shadow-large hover-lift">
+              <Button size="lg" className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 shadow-large hover-lift">
                 <BarChart3 className="w-5 h-5 mr-2" />
                 Login as Admin
               </Button>
